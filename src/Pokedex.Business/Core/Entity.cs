@@ -16,7 +16,7 @@ namespace Pokedex.Business.Core
 
         }
 
-        public virtual ValidationResult Validated()
+        public virtual ValidationResult Validate()
         {
             throw new NotImplementedException("Override the validate method with valid conditions");
         }

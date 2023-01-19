@@ -9,11 +9,11 @@ namespace Pokedex.Business.Services
 {
     public interface IPokedexService
     {
-        Task<Guid?> AddPokemon(Pokemon pokemon);
+        Task<Guid?> AddPokemonAsync(Pokemon pokemon);
 
-        Task UpdatePokemon(Pokemon pokemon);
+        Task UpdatePokemonAsync(Pokemon pokemon);
 
-        Task DeletePokemon(Guid pokemonId);
+        Task DeletePokemonAsync(Guid pokemonId);
 
 
     }

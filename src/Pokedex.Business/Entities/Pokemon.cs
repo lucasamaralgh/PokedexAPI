@@ -1,12 +1,13 @@
 ﻿using FluentValidation.Results;
 using Pokedex.Business.Core;
 using Pokedex.Business.Enums;
+using Pokedex.Business.Validations;
 
 namespace Pokedex.Business.Entities
 {
     public  class Pokemon : Entity
     {
-        public String Name { get; private set; }
+        public string Name { get; private set; }
 
         public Guid CategoryId { get; private set; }
 
@@ -31,9 +32,9 @@ namespace Pokedex.Business.Entities
             Speed = speed;
         }
 
-        public override ValidationResult Validated()
+        public override ValidationResult Validate()
         {
-            return new ValidationResult();
+            return new PokemonValidation().Validate(this);
         }
     }
-}
+} 
