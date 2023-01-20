@@ -11,9 +11,9 @@ namespace Pokedex.Business.Repositories
     {
         Task AddAsync(Pokemon pokemon);
 
-        void UpdateAsync(Pokemon pokemon);
+        void Update(Pokemon pokemon);
 
-        void DeleteAsync(Pokemon pokemon);
+        void Delete(Guid pokemonId);
 
         Task<bool> HasPokemonAsync(Guid pokemonID);
 
@@ -21,6 +21,6 @@ namespace Pokedex.Business.Repositories
 
         Task<Pokemon> GetByNameAsync(string name);
 
-        Task<IEnumerable<Pokemon>> FindAsyn();
+        Task<IEnumerable<Pokemon>> FindAsync();
     }
 }
