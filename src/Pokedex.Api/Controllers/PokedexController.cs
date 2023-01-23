@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Pokedex.Api.Models;
+using Pokedex.Business.Core.Notifications;
 using Pokedex.Business.Entities;
 using Pokedex.Business.Services;
 using Swashbuckle.AspNetCore.Annotations;
@@ -12,12 +13,14 @@ namespace Pokedex.Api.Controllers
     {
         private readonly IPokedexService _pokedexService;
         private readonly IMapper _mapper;
+        private readonly INotifier _notifier;
 
 
-        public PokedexController(IPokedexService pokedexService, IMapper mapper)
+        public PokedexController(IPokedexService pokedexService, IMapper mapper, INotifier notifier)
         {
             _pokedexService = pokedexService;
             _mapper = mapper;
+            _notifier = notifier;
         }
 
         [HttpPost]
@@ -29,10 +32,8 @@ namespace Pokedex.Api.Controllers
 
             var pokemonId = await _pokedexService.AddPokemonAsync(pokemon);
 
-            if (pokemonId == null) 
-            { 
-                return NotFound(); 
-            }
+            if (_notifier.HasNotification)
+                UnprocessableEntity();
 
             return Created($"{HttpContext.Request.Path}/{pokemonId}", null);
         }
