@@ -22,6 +22,7 @@ namespace Pokedex.Api
             _services.AddSmartNotification();
             _services.AddServices();
             _services.AddRepositories();
+            _services.AddDbContexts(_configuration);
             _services.AddAutoMapper(GetType().Assembly);
         }
 
