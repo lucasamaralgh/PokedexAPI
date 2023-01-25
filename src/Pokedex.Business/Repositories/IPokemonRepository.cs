@@ -1,4 +1,6 @@
-﻿using Pokedex.Business.Entities;
+﻿using Pokedex.Business.Core;
+using Pokedex.Business.Entities;
+using Pokedex.Business.Queries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Pokedex.Business.Repositories
 {
-    public interface IPokemonRepository
+    public interface IPokemonRepository : IRepository
     {
         Task AddAsync(Pokemon pokemon);
 
@@ -17,10 +19,10 @@ namespace Pokedex.Business.Repositories
 
         Task<bool> HasPokemonAsync(Guid pokemonID);
 
-        Task<Pokemon> GetByIdAsync(Guid pokemonID);
+        Task<Pokemon?> GetByIdAsync(Guid pokemonID);
 
-        Task<Pokemon> GetByNameAsync(string name);
+        Task<Pokemon?> GetByNameAsync(string name);
 
-        Task<IEnumerable<Pokemon>> FindAsync();
+        Task<IEnumerable<Pokemon>> FindAsync(FindPokemonQuery query);
     }
 }

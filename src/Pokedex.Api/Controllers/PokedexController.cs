@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Pokedex.Api.Models;
 using Pokedex.Business.Core.Notifications;
 using Pokedex.Business.Entities;
+using Pokedex.Business.Queries;
+using Pokedex.Business.Repositories;
 using Pokedex.Business.Services;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -12,13 +14,15 @@ namespace Pokedex.Api.Controllers
     public class PokedexController : ControllerBase
     {
         private readonly IPokedexService _pokedexService;
+        private readonly IPokemonRepository _pokemonRepository;
         private readonly IMapper _mapper;
         private readonly INotifier _notifier;
 
 
-        public PokedexController(IPokedexService pokedexService, IMapper mapper, INotifier notifier)
+        public PokedexController(IPokedexService pokedexService, IPokemonRepository pokemonRepository, IMapper mapper, INotifier notifier)
         {
             _pokedexService = pokedexService;
+            _pokemonRepository = pokemonRepository;
             _mapper = mapper;
             _notifier = notifier;
         }
@@ -64,17 +68,26 @@ namespace Pokedex.Api.Controllers
         [ProducesResponseType(typeof(Pokemon), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetPokemonById()
         {
+            //var pokemon = await _pokedexService.GetPokemonById(pokemonId);
 
+            //if (pokemon == null)
+            //    return NotFound();
+
+            //var result = _mapper.Map<PokemonModel>(pokemon);
             return Ok();
         }
 
         [HttpGet("find")]
         [SwaggerOperation("Listar pokémons")]
         [ProducesResponseType(typeof(IEnumerable<Pokemon>), StatusCodes.Status200OK)]
-        public async Task<IActionResult> FindPokemon()
+        public async Task<IActionResult> FindPokemon(FindPokemonQuery query)
         {
+            var pokemons = await _pokemonRepository.FindAsync(query);
 
-            return Ok();
+            HttpContext.Response.Headers.Add("X-Total-Count", pokemons.Count().ToString());
+
+            var result = _mapper.Map<IEnumerable<PokemonModel>>(pokemons);
+            return Ok(result);
         }
     }
 }

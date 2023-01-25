@@ -1,4 +1,5 @@
 ﻿using Pokedex.Business.Entities;
+using Pokedex.Business.Queries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace Pokedex.Business.Services
 
         Task DeletePokemonAsync(Guid pokemonId);
 
+        Task<IEnumerable<Pokemon>> Find(FindPokemonQuery query);
 
     }
 }
