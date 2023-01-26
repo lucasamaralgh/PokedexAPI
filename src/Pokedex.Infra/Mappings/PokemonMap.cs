@@ -27,7 +27,7 @@ namespace Pokedex.Infra.Mappings
             builder.Property(p => p.Speed).HasColumnName("Speed");
 
             builder.Property(p => p.CreatedAt).HasColumnName("CreatedAt");
-            builder.Property(p => p.UpdateAt).HasColumnName("UpdateAt");
+            builder.Property(p => p.UpdatedAt).HasColumnName("UpdatedAt");
         }
     }
 }

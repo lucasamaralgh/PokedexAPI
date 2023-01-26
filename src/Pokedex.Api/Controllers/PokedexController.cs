@@ -66,15 +66,16 @@ namespace Pokedex.Api.Controllers
         [HttpGet("{pokedexId:guid}")]
         [SwaggerOperation("Obter pokémon por Id")]
         [ProducesResponseType(typeof(Pokemon), StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetPokemonById()
+        public async Task<IActionResult> GetPokemonById(Guid pokemonId)
         {
-            //var pokemon = await _pokedexService.GetPokemonById(pokemonId);
+            var pokemon =  await _pokedexService.GetByIdAsync(pokemonId);
 
-            //if (pokemon == null)
-            //    return NotFound();
+            if (pokemon == null)
+                return NotFound();
 
-            //var result = _mapper.Map<PokemonModel>(pokemon);
-            return Ok();
+            var result = _mapper.Map<PokemonModel>(pokemon);
+            
+            return Ok(result);
         }
 
         [HttpGet("find")]

@@ -11,7 +11,7 @@ namespace Pokedex.Business.Services
         private readonly INotifier _notifier;
         private readonly IPokemonRepository _pokemonRepository;
 
-        public PokedexService (IPokemonRepository pokemonRepository, INotifier notifier)
+        public PokedexService(IPokemonRepository pokemonRepository, INotifier notifier)
         {
             _notifier = notifier;
             _pokemonRepository = pokemonRepository;
@@ -21,7 +21,7 @@ namespace Pokedex.Business.Services
         {
             var validation = pokemon.Validate();
 
-            if (validation.IsValid)
+            if (!validation.IsValid)
             {
                 _notifier.Notify(validation);
                 return null;
@@ -86,6 +86,11 @@ namespace Pokedex.Business.Services
             _pokemonRepository.Delete(pokemonId);
 
             await _pokemonRepository.CommitAsync();
+        }
+
+        public async Task<Pokemon?> GetByIdAsync(Guid pokemonId)
+        {
+            return await _pokemonRepository.GetByIdAsync(pokemonId);
         }
 
         public async Task<IEnumerable<Pokemon>> Find(FindPokemonQuery query)

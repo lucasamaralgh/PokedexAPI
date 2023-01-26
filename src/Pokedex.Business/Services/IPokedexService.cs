@@ -16,6 +16,8 @@ namespace Pokedex.Business.Services
 
         Task DeletePokemonAsync(Guid pokemonId);
 
+        Task<Pokemon?> GetByIdAsync(Guid pokemonId);
+
         Task<IEnumerable<Pokemon>> Find(FindPokemonQuery query);
 
     }
