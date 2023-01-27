@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Pokedex.Api.Models;
 using Pokedex.Business.Core.Notifications;
+using Pokedex.Business.Core.Pagination;
 using Pokedex.Business.Entities;
 using Pokedex.Business.Queries;
 using Pokedex.Business.Repositories;
@@ -10,6 +12,7 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Pokedex.Api.Controllers
 {
+    [Authorize]
     [Route("pokedex")]
     public class PokedexController : ControllerBase
     {
@@ -80,14 +83,12 @@ namespace Pokedex.Api.Controllers
 
         [HttpGet("find")]
         [SwaggerOperation("Listar pokémons")]
-        [ProducesResponseType(typeof(IEnumerable<Pokemon>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(PagedList<Pokemon>), StatusCodes.Status200OK)]
         public async Task<IActionResult> FindPokemon(FindPokemonQuery query)
         {
             var pokemons = await _pokemonRepository.FindAsync(query);
 
-            HttpContext.Response.Headers.Add("X-Total-Count", pokemons.Count().ToString());
-
-            var result = _mapper.Map<IEnumerable<PokemonModel>>(pokemons);
+            var result = _mapper.Map<PagedList<PokemonModel>>(pokemons);
             return Ok(result);
         }
     }

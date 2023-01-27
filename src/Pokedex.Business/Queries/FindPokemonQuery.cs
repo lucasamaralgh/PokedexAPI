@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pokedex.Business.Core.Pagination;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Pokedex.Business.Queries
 {
-    public class FindPokemonQuery
+    public class FindPokemonQuery : PagedInputModel
     {
         public string Name { get; set; } = default!;
 

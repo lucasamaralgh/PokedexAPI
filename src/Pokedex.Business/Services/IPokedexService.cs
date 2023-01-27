@@ -1,4 +1,5 @@
-﻿using Pokedex.Business.Entities;
+﻿using Pokedex.Business.Core.Pagination;
+using Pokedex.Business.Entities;
 using Pokedex.Business.Queries;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace Pokedex.Business.Services
 
         Task<Pokemon?> GetByIdAsync(Guid pokemonId);
 
-        Task<IEnumerable<Pokemon>> Find(FindPokemonQuery query);
+        Task<PagedList<Pokemon>> Find(FindPokemonQuery query);
 
     }
 }

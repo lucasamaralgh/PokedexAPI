@@ -1,4 +1,5 @@
 ﻿using Pokedex.Business.Core.Notifications;
+using Pokedex.Business.Core.Pagination;
 using Pokedex.Business.Entities;
 using Pokedex.Business.Queries;
 using Pokedex.Business.Repositories;
@@ -93,7 +94,7 @@ namespace Pokedex.Business.Services
             return await _pokemonRepository.GetByIdAsync(pokemonId);
         }
 
-        public async Task<IEnumerable<Pokemon>> Find(FindPokemonQuery query)
+        public async Task<PagedList<Pokemon>> Find(FindPokemonQuery query)
         {
             return await _pokemonRepository.FindAsync(query);
         }

@@ -9,16 +9,16 @@ namespace Pokedex.Api.Configurations
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
             //Se chamar a interface, chama a classe da service
-            services.AddScoped<IPokedexService, PokedexService>(); // 1 objeto por request
+            services.AddScoped<IPokedexService, PokedexService>(); 
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
             return services;
-
-            //services.AddAddTransient<IPokedexService, PokedexService>(); // 10 objetos 
-            //services.AddSingleton<IPokedexService, PokedexService>(); -> 1 objeto enquanto a aplicação estiver no ar
         }
 
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             services.AddScoped<IPokemonRepository, PokemonRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+
             return services;
         }
     }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Pokedex.Api.Models;
+using Pokedex.Business.Core.Pagination;
 using Pokedex.Business.Entities;
 
 namespace Pokedex.Api.Configurations
@@ -9,6 +10,8 @@ namespace Pokedex.Api.Configurations
         public AutoMapperConfig()
         {
             CreateMap<PokemonModel, Pokemon>().ReverseMap();
+
+            CreateMap(typeof(PagedList<>), typeof(PagedList<>));
         }
     }
 }

@@ -17,6 +17,7 @@ namespace Pokedex.Api
 
         public void ConfigureServices() //processar tudo que é services
         {
+            _services.AddAuthenticationConfig(_configuration);
             _services.AddControllers();
             _services.AddEndpointsApiExplorer();
             _services.AddSwaggerGen(options => options.EnableAnnotations());

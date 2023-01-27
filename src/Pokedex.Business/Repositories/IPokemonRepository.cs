@@ -1,4 +1,5 @@
 ﻿using Pokedex.Business.Core;
+using Pokedex.Business.Core.Pagination;
 using Pokedex.Business.Entities;
 using Pokedex.Business.Queries;
 using System;
@@ -23,6 +24,6 @@ namespace Pokedex.Business.Repositories
 
         Task<Pokemon?> GetByNameAsync(string name);
 
-        Task<IEnumerable<Pokemon>> FindAsync(FindPokemonQuery query);
+        Task<PagedList<Pokemon>> FindAsync(FindPokemonQuery query);
     }
 }
