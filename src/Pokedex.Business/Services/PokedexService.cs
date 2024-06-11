@@ -46,7 +46,7 @@ namespace Pokedex.Business.Services
         {
             var validation = pokemon.Validate();
 
-            if (validation.IsValid)
+            if (!validation.IsValid)
             {
                 _notifier.Notify(validation);
                 return;
@@ -56,7 +56,7 @@ namespace Pokedex.Business.Services
 
             if (!hasPokemon)
             {
-                _notifier.Notify("Não foi posivel encontrar o pokémon informado.");
+                _notifier.Notify("Não foi possivel encontrar o pokémon informado.");
                 return;
             }
 
@@ -80,7 +80,7 @@ namespace Pokedex.Business.Services
 
             if (!hasPokemon)
             {
-                _notifier.Notify("Não foi posivel encontrar o pokémon informado. ");
+                _notifier.Notify("Não foi possivel encontrar o pokémon informado.");
                 return;
             }
 
